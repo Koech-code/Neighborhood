@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+        <a href="#" class="btn btn-sm btn-info mb-2"> New Hood</a>
+    <div class="row">
+        {% for hood in neighborhoods %}
+        <div class="col-md-4">
+            <div class="card mb-4" style="min-height:340px">
+                <img src="{{ hood.image.url }}" class="card-img-top" alt="{{ hood.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ hood.name }}  ({{hood.location}}) </h5>
+                        <p><span class="ml-4">{{hood.members.count}} member{{hood.members.count|pluralize}}</span></p>
+                    <p class="card-text">{{hood.description}}</p>
+                    {% if request.user.profile.neighborhood == hood %}
+                    <a href="{% url 'hoodleave' hood.id%}" class="btn btn-outline-danger btn-sm">Leave Hood</a>
+                    {% elif not request.user.profile.neighborhood %}
+                    <a href="{% url 'hoodjoin' hood.id%}" class="btn btn-primary btn-sm">Join Hood</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
