@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-
+from .models import *
 
 # Create your forms here.
 
@@ -19,3 +19,15 @@ class NewUserForm(UserCreationForm):
 			user.save()
 
 		return user
+
+
+class NeighborhoodForm(forms.ModelForm):
+    class Meta:
+        model = Neighborhood
+        exclude = ('admin',)
+
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        exclude = ('user', 'hood')
