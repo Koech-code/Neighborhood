@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container">
-        <a href="#" class="btn btn-sm btn-info mb-2"> New Hood</a>
+        <a href="{% url 'create' %}" class="btn btn-sm btn-info mb-2"> New Hood</a>
     <div class="row">
         {% for hood in neighborhoods %}
         <div class="col-md-4">
@@ -20,6 +20,8 @@
             </div>
         </div>
         {% endfor %}
+
     </div>
+
 </div>
 {% endblock %}
