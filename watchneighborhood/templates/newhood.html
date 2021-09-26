@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% block content %}
+<div class="container bg-white newhood" styles="">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <h3 class="text-center">Add Your Neighborhood Here</h3>
+            <form action="" method="post" enctype="multipart/form-data" novalidate>
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                <button class="btn btn-sm btn-success">Add Hood</button>
+            </form>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+
+</div>
+{% endblock %}
