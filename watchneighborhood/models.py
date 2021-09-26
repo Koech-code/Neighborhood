@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-
 class Neighborhood(models.Model):
     name=models.CharField(max_length=30)
     location=models.CharField(max_length=30)
@@ -28,6 +27,21 @@ class Business(models.Model):
     user=models.ForeignKey(Profile, on_delete=models.CASCADE)
     neighborhood_id=models.ForeignKey(Neighborhood, on_delete=models.CASCADE)
     email=models.EmailField()
+    business_pic=models.ImageField(upload_to='images', default='nopicture.png')
+    
+    def __str__(self):
+        return f'{self.name} Business'
+
+    def create_business(self):
+        self.save()
+
+    def delete_business(self):
+        self.delete()
+
+    @classmethod
+    def search_business(cls, name):
+        return cls.objects.filter(name__icontains=name).all()
+
 
 class Post(models.Model):
     user=models.ForeignKey(Profile, on_delete=models.CASCADE )
