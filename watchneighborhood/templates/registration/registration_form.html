@@ -1,0 +1,42 @@
+{%extends "base.html"%}
+{% load bootstrap5 %}
+{% block content %}
+<div class="box" style="color: rgb(230, 133, 6); font-weight: bolder; margin-top: 2%; margin-bottom: 2%;">
+<div class="container" style="background-image: linear-gradient(90deg, rgb(245, 248, 250) 0%, #ebf0f3 35%, #c3d3f1 100%); width: 50rem;">
+  <div class="row">
+    <!-- Empty div -->
+    <div class="col-sm-12"></div>
+    <div class="col-sm-12">
+      {% if form.errors %}
+        <p> Some Information Might be Incorrect </p>
+      {% endif %}
+      <div class="panel panel-default">
+
+        <div class="panel-heading">
+          <h3 class="text-center">Sign Up</h3>
+        </div>
+        <hr>
+        <div class="panel-body">
+
+          <form  action="/accounts/register/" method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <div class="form-group" style="margin-bottom: 2%;">
+              <input type="submit" class="btn btn-secondary btn-sm" value="Sign Up">
+            </div>
+            <input type="hidden" name="next" value="{{next}}">
+            <h5>Already have an account?<a href="/accounts/login/"> Login</a></h5>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+    <!-- empty div -->
+    <div class="col-md-4"></div>
+  </div>
+</div>
+</div>
+{% endblock %}
