@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-light " style="background-color: skyblue;">
+<nav class="navbar navbar-expand-lg navbar-light " style="background-image: linear-gradient(90deg, skyblue 0%, #e6ecf8 100%);">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar scroll</a>
+      <a class="navbar-brand" href="{% url 'home' %}">Navbar scroll</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -12,15 +12,14 @@
           <li class="nav-item ">
             <a class="nav-link" href="#">Link</a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              ACCOUNTS
-            </a>
+          <li class="nav-item dropdown px-2">
+            <button class="nav-link dropdown-toggle btn btn-secondary" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+             <span  style="color: white;">ACCOUNTS</span> 
+            </button>
             <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
               {% if user.is_authenticated%}
-              <li><a class="dropdown-item" href="#">Profile</a></li>
-              <li><a class="dropdown-item" href="#">Log out</a></li>
-              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/profile/">Profile</a></li>
+              <li><a class="dropdown-item" href="/logout">Log out</a></li>
               {% else%}
               <li><a class="dropdown-item" href="/accounts/register/">Register</a></li>
               <li><a class="dropdown-item" href="/accounts/login/">Login</a></li>
@@ -29,12 +28,25 @@
               {% endif %}
             </ul>
           </li>
+          <li class="nav-item dropdown ml-2">
+            <button class="nav-link dropdown-toggle btn btn-secondary" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+             <span  style="color: white;">NEIGHBORHOOD</span> 
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+              <li><a class="dropdown-item" href="#">Join</a></li> 
+              <li><a class="dropdown-item" href="/accounts/register/">Business</a></li>
+              <li><a class="dropdown-item" href="#">Post</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/logout">Leave</a></li>
+            </ul>
+          </li>
+         
          
           <li class="nav-item">
             <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Link</a>
           </li>
         </ul>
-        <form class="d-flex">
+        <form class="d-flex" action="{% url 'search'%}" method="GET">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
