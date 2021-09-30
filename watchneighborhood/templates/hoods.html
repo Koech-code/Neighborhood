@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
+{}
 {% block content %}
 <div class="container">
-        <a href="{% url 'create' %}" class="btn btn-sm btn-info mb-2"> New Hood</a>
-    <div class="row">
+        
+    <div class="row ">
         {% for hood in neighborhoods %}
-        <div class="col-md-4">
-            <div class="card mb-4" style="min-height:340px">
-                <img src="{{ hood.image.url }}" class="card-img-top" alt="{{ hood.name }}">
-                <div class="card-body">
+        <div class="col-md-12">
+            <div class="col-md-6 mb-2 py-1 px-2">
+                <img src="{{ hood.image.url }}" class=" rounded-circle"  width="200" alt="{{ hood.name }}">
+            </div>
+                <div class="card-body ">
                     <h5 class="card-title">{{ hood.name }}  ({{hood.location}}) </h5>
                         <p><span class="ml-4">{{hood.members.count}} member{{hood.members.count|pluralize}}</span></p>
                     <p class="card-text">{{hood.description}}</p>
@@ -16,12 +18,53 @@
                     {% elif not request.user.profile.neighborhood %}
                     <a href="{% url 'hoodjoin' hood.id%}" class="btn btn-primary btn-sm">Join Hood</a>
                     {% endif %}
+        
                 </div>
             </div>
         </div>
+        <hr>
+        <h3 class="text-center " style="color: green;">Businesses in your neighborhood</h3>
+        
+            <div class="row">
+                {% for businesses in business %}
+                <div class="col-md-3">
+                    <div class="card mb-4" style="min-height:100px">
+                        <img src="{{ businesses.business_pic.url }}" class="card-img-top" alt="{{ business.name }}"> 
+                        <div class="card-body">
+                            <h5 class="card-title">{{businesses.name}}</h5>
+                                <p>Owner: {{businesses.user}} of <a style="text-decoration:none; list-style: none; color: chocolate;" href="/profile/">profile</a></p>
+                            <p class="card-text">{{hood.neighborhood_id}}</p>
+                            <p>My email: {{businesses.email}}</p>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+                {% endfor %}
+            </div>
+            <hr>
+            <h3 class="text-center " style="color: rgb(0, 70, 128);"><span style="color: darkcyan;">{{hood.name}}</span> neighborhood general posting site</h3>
+        <div class="row">
+            {% for business in post %}
+            <div class="col-md-3">
+                <div class="card mb-4 " style="min-height:40px"
+                    <div class="card-body">
+                        <h5 class="card-title">{{business.title}}</h5>  
+                        <p>{{business.post}}</p> 
+                        <p>CC: <span style="color:grey;">{{business.neighborhood}}</span></p> 
+
+                        <p>Posted by: <span style="color: cadetblue;">{{business.user}}</span> <span style="color: #e76f51;">{{business.date |timesince}}</span> ago</p> 
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <button class="btn btn-success" type="submit"><a style="text-decoration:none; list-style: none; color: white;" href="{% url 'post' hood.id%}">Write & post</a></button> 
+        </div>
+       
+        
         {% endfor %}
-
+       
     </div>
-
+   
 </div>
 {% endblock %}

@@ -5,14 +5,15 @@ from . import views
 
 urlpatterns=[
     url('^$', views.index, name='home'),
-    url('all-hoods/', views.neighborhood, name='hood'),
+    url(r'^all-hoods/(\d+)', views.neighborhood, name='hood'),
     url('join/(\d+)', views.join_hood, name='hoodjoin'),
     url('leave/(\d+)', views.leave_hood, name='hoodleave'),
     url('profile/', views.profile, name='profile'),
-    url('create-hoods/', views.create_hood, name='create'),
     url('new-post/(\d+)', views.create_post, name='post'),
     url('business/', views.business, name='business'),
     url('search/', views.business_search, name='search'),
+    url('update/', views.update_profile, name='update'),
+
 ]
 
 if settings.DEBUG:

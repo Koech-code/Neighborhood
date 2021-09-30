@@ -2,21 +2,22 @@
 
 {% block content %}
 
-<div class="container ">
-    <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6 mt-4 bg-white prof mr-2 ml-2">
-            <img class="rounded-circle account-img d-block mx-auto" src="{{ user.profile.profile_pic }}"height="125px" width="125px">
-            <h5 class="text-center mt-3">{{user.username}}</h5>
-            <p class="text-center"> {{user.email}}</p>
-            {% if request.user.neighborhood %}
-            <p class="text-center">Hood <a class="btn btn-sm btn-info" href="#">{{ user.neighborhood.name }}</a>
-            </p>
-            {% endif %}
+{% for user in profile %}
+<br>
+<div class="container d-flex justify-content-center">
+    <div class="card p-3 py-4">
+        <div class="text-center"> <img src="{{user.profile_pic.url}}" width="100" class="rounded-circle">
+            <h3 class="mt-2">{{user.name}}</h3>
+            <hr class="line"> <small class="mt-4"></small>
+            <span class="mt-1 clearfix">{{user.bio}}</span>
+            <span class="mt-1 clearfix">I belong to - <a  style="text-decoration:none; list-style: none;" href="/all-hoods/4"><span style="color: skyblue;">{{user.neighborhood}}</span></a> </span>
+            <div class="profile mt-5"> 
+            <button class="profile_button px-5">
+                <a style="text-decoration:none; list-style: none; color: cadetblue;" href="/update/">Edit profile</a>
+            </button>
         </div>
-        <div class="col-md-3"></div>
     </div>
-
-
 </div>
+
+{% endfor%}
 {% endblock %}
